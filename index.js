@@ -13,13 +13,18 @@ $(document).on("keydown", function () {
 });
 
 $(document).click(function (event) {
-  clickOnSquare(event);
+    if (!start) {
+        keyToStartPressed();
+    }
+    else {
+        clickOnSquare(event);
+    }
 });
 
 function keyToStartPressed() {
   // Change h1 tag to level 1
   var text = $("#level-title").text();
-  if (start && restart) {
+  if (!start && restart) {
     start = false;
     restart = false;
     $("body").removeClass("game-over");
@@ -82,6 +87,7 @@ function gameOver() {
   $("#level-title").text("Game Over, Press Any Key to Restart");
   makeSound("wrong");
   restart = true;
+  start = false;
 }
 
 function nextSquare() {
